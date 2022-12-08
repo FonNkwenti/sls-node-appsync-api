@@ -1,13 +1,48 @@
 service: sls-node-appsync-api
 
-frameworkVersion: '2 || 3'
-
+frameworkVersion: "2 || 3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs16.x
   lambdaHashingVersion: 20201221
+  region: ${opt:region, 'us-west-1'}
+  state: ${opt:stage, 'dev'}
+  environment:
+    DYNAMODB_TABLE_NAME: ${self:custom.TODO_TABLE}
+
+plugins:
+  - serverless-iam-roles-per-function
+
+custom:
+  appSync: ${file(templates/appsync.yml)}
+  TODO_TABLE: todo-table
+
+dataSources:
+  - type: AWS_LAMBDA
+    name: createTodoFunction
+    config:
+      functionName: createTodo
 
 functions:
-  hello:
-    handler: handler.hello
+  createTodo:
+    handler: functions/createTodo.handler
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - dynamodb:GetItem
+        Resource: !GetAtt TodoTable.Arn
+
+resources:
+  Resources:
+    TodoTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: ${self:custom.TODO_TABLE}-${self:provider.stage}
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
