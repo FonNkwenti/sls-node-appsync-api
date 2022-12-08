@@ -18,6 +18,29 @@ custom:
   appSync: ${file(templates/appsync.yml)}
   TODO_TABLE: todo-table
 
+appSync:
+
+name: sls-node-appsync-todo-api
+
+authenticationType: API_KEY
+
+# schema: schemas/*.graphql
+schema: schema.graphql
+
+logConfig:
+  level: NONE
+
+substitutions:
+
+mappingTemplates:
+  - type: Mutation
+    field: createTodo
+    dataSource: createTodoFunction
+    request: false
+    response: false
+
+functionConfigurations:
+
 dataSources:
   - type: AWS_LAMBDA
     name: createTodoFunction

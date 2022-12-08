@@ -1,0 +1,19 @@
+{
+  "name": "sls-node-appsync-api",
+  "version": "1.0.0",
+  "description": "serverless framework appsync todo api",
+  "main": "./functions",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FonNkwenti/sls-node-appsync-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FonNkwenti/sls-node-appsync-api/issues"
+  },
+  "homepage": "https://github.com/FonNkwenti/sls-node-appsync-api#readme"
+}
