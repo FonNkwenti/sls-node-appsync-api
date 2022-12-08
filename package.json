@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/FonNkwenti/sls-node-appsync-api/issues"
   },
-  "homepage": "https://github.com/FonNkwenti/sls-node-appsync-api#readme"
+  "homepage": "https://github.com/FonNkwenti/sls-node-appsync-api#readme",
+  "devDependencies": {
+    "serverless-webpack": "^5.11.0"
+  }
 }
