@@ -53,10 +53,21 @@ dataSources:
     name: createTodoFunction
     config:
       functionName: createTodo
+  - type: AWS_LAMBDA
+    name: getTodoFunction
+    config:
+      functionName: getTodo
 
 functions:
   createTodo:
     handler: functions/createTodo.handler
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - dynamodb:putItem
+        Resource: !GetAtt TodoTable.Arn
+  getTodo:
+    handler: functions/getTodo.handler
     iamRoleStatements:
       - Effect: "Allow"
         Action:

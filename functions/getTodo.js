@@ -5,14 +5,10 @@ const AWS = require("aws-sdk");
 AWS.config.update({ region: "us-west-1" });
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-const { v4: uuidv4 } = require("uuid");
-
 const TableName = process.env.DYNAMODB_TABLE_NAME;
 
 module.exports.handler = async (event) => {
   // const id = event.arguments.id
-
-  const id = uuidv4();
 
   const name = event.arguments.name;
   const description = event.arguments.description;

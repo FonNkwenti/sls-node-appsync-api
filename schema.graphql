@@ -1,8 +1,12 @@
 schema {
-  #   query: Query
+    query: Query
   mutation: Mutation
 }
 
 type Mutation {
   createTodo(id: ID!, name: String!, description: String!, priority: Int): Save
+}
+
+type Query{
+    getTodo(id: ID!)
 }
